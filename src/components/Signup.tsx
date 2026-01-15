@@ -1,18 +1,24 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import Divider from "@mui/material/Divider";
-import FormLabel from "@mui/material/FormLabel";
-import FormControl from "@mui/material/FormControl";
-import Link from "@mui/material/Link";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
-import Stack from "@mui/material/Stack";
-import MuiCard from "@mui/material/Card";
+import {
+  Box,
+  Button,
+  CssBaseline,
+  Divider,
+  FormControl,
+  FormLabel,
+  Link,
+  TextField,
+  Typography,
+  Stack,
+  Card as MuiCard,
+  Alert,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
-import Navbar from "./ui/Navbar";
 import { Controller, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Navbar from "./ui/Navbar";
+import { signUpSchema, type SignUpInput } from "../utils/schema";
+import bcrypt from "bcryptjs";
+import { v4 as uuid } from "uuid";
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -23,74 +29,91 @@ const Card = styled(MuiCard)(({ theme }) => ({
   gap: theme.spacing(2),
   margin: "auto",
   boxShadow:
-    "hsla(220, 30%, 5%, 0.05) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.05) 0px 15px 35px -5px",
+    "hsla(220, 30%, 5%, 0.05) 0px 5px 15px, hsla(220, 25%, 10%, 0.05) 0px 15px 35px -5px",
   [theme.breakpoints.up("sm")]: {
     width: "450px",
   },
-  ...theme.applyStyles("dark", {
-    boxShadow:
-      "hsla(220, 30%, 5%, 0.5) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.08) 0px 15px 35px -5px",
-  }),
 }));
 
 const SignUpContainer = styled(Stack)(({ theme }) => ({
-  height: "calc((1 - var(--template-frame-height, 0)) * 100dvh)",
-  minHeight: "100%",
+  height: "100dvh",
   padding: theme.spacing(2),
-  [theme.breakpoints.up("sm")]: {
-    padding: theme.spacing(4),
-  },
+  justifyContent: "center",
   "&::before": {
     content: '""',
-    display: "block",
     position: "absolute",
-    zIndex: -1,
     inset: 0,
+    zIndex: -1,
     backgroundImage:
-      "radial-gradient(ellipse at 50% 50%, hsl(210, 100%, 97%), hsl(0, 0%, 100%))",
-    backgroundRepeat: "no-repeat",
-    ...theme.applyStyles("dark", {
-      backgroundImage:
-        "radial-gradient(at 50% 50%, hsla(210, 100%, 16%, 0.5), hsl(220, 30%, 5%))",
-    }),
+      "radial-gradient(ellipse at center, hsl(210, 100%, 97%), white)",
   },
 }));
 
-type SignUpFormValues = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phoneNumber: number
-  password: string;
-  confirmPassword: string;
+const STORAGE_KEY = "users";
+
+export const getUsers = (): any[] => {
+  const users = localStorage.getItem(STORAGE_KEY);
+  return users ? JSON.parse(users) : [];
 };
 
-export default function SignUp(props: { disableCustomTheme?: boolean }) {
+const emailValidation = (email: string, users: any[]) => {
+  return users.some((user) => user.email.toLowerCase() === email.toLowerCase());
+};
+
+const saveUsers = (users: any[]) => {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(users));
+};
+
+export default function SignUp() {
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignUpFormValues>({
+  } = useForm<SignUpInput>({
+    resolver: zodResolver(signUpSchema),
     defaultValues: {
       firstName: "",
       lastName: "",
       email: "",
-      // phoneNumber: 0,
+      phoneNumber: "",
       password: "",
       confirmPassword: "",
     },
   });
 
-  const onSubmit = (data: SignUpFormValues) => {
-    console.log("Form Data:", data);
+  const onSubmit = async (data: SignUpInput) => {
+    const { password, confirmPassword, email, ...rest } = data;
+
+    const users = getUsers();
+
+    if (emailValidation(email, users)) {
+      <Alert variant="filled" severity="error">
+        User already exists!!
+      </Alert>;
+      return;
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = {
+      id: uuid(),
+      email,
+      password: hashedPassword,
+      ...rest,
+    };
+    users.push(newUser);
+    saveUsers(users);
+    console.log("Saved to local storage:", newUser);
+    <Alert variant="filled" severity="success">
+      Account created successfully!!
+    </Alert>;
   };
 
   return (
-    <div>
+    <>
       <Navbar />
       <CssBaseline />
 
-      <SignUpContainer direction="column" justifyContent="center">
+      <SignUpContainer>
         <Card variant="outlined">
           <Typography component="h1" variant="h4">
             Sign up
@@ -101,20 +124,34 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
             onSubmit={handleSubmit(onSubmit)}
             sx={{ display: "flex", flexDirection: "column", gap: 2 }}
           >
-            {/* Name */}
+            {/* First Name */}
             <FormControl>
               <FormLabel>First name</FormLabel>
               <Controller
                 name="firstName"
                 control={control}
-                rules={{
-                  required: "Name is required",
-                }}
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    placeholder="Jon Snow"
+                    value={field.value ?? ""}
                     error={!!errors.firstName}
+                    helperText={errors.firstName?.message}
+                  />
+                )}
+              />
+            </FormControl>
+
+            {/* Last Name */}
+            <FormControl>
+              <FormLabel>Last name</FormLabel>
+              <Controller
+                name="lastName"
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    value={field.value ?? ""}
+                    error={!!errors.lastName}
                     helperText={errors.lastName?.message}
                   />
                 )}
@@ -127,17 +164,11 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
               <Controller
                 name="email"
                 control={control}
-                rules={{
-                  required: "Email is required",
-                  pattern: {
-                    value: /\S+@\S+\.\S+/,
-                    message: "Enter a valid email address",
-                  },
-                }}
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    placeholder="your@email.com"
+                    value={field.value ?? ""}
+                    type="email"
                     error={!!errors.email}
                     helperText={errors.email?.message}
                   />
@@ -151,12 +182,11 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
               <Controller
                 name="phoneNumber"
                 control={control}
-                rules={{
-                  required: "Number is required",
-                }}
                 render={({ field }) => (
                   <TextField
                     {...field}
+                    value={field.value ?? ""}
+                    type="tel"
                     error={!!errors.phoneNumber}
                     helperText={errors.phoneNumber?.message}
                   />
@@ -170,18 +200,11 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
               <Controller
                 name="password"
                 control={control}
-                rules={{
-                  required: "Password is required",
-                  minLength: {
-                    value: 6,
-                    message: "Password must be at least 6 characters",
-                  },
-                }}
                 render={({ field }) => (
                   <TextField
                     {...field}
+                    value={field.value ?? ""}
                     type="password"
-                    placeholder="••••••"
                     error={!!errors.password}
                     helperText={errors.password?.message}
                   />
@@ -189,18 +212,36 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
               />
             </FormControl>
 
-            <Button type="submit" fullWidth variant="contained">
+            {/* Confirm Password */}
+            <FormControl>
+              <FormLabel>Confirm Password</FormLabel>
+              <Controller
+                name="confirmPassword"
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    value={field.value ?? ""}
+                    type="password"
+                    error={!!errors.confirmPassword}
+                    helperText={errors.confirmPassword?.message}
+                  />
+                )}
+              />
+            </FormControl>
+
+            <Button type="submit" variant="contained" fullWidth>
               Sign up
             </Button>
           </Box>
 
           <Divider />
 
-          <Typography sx={{ textAlign: "center" }}>
+          <Typography textAlign="center">
             Already have an account? <Link href="/login">Log in</Link>
           </Typography>
         </Card>
       </SignUpContainer>
-    </div>
+    </>
   );
 }
