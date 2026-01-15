@@ -6,7 +6,7 @@ import Signup from './components/Signup.tsx';
 import Login from './components/Login.tsx';
 import EditProfile from './components/EditProfile.tsx';
 import ChangePassword from './components/ChangePassword.tsx';
-import ProductListing from './components/ProductListing.tsx';
+import Products from './components/Products.tsx';
 import ViewProduct from './components/ViewProduct.tsx';
 
 createRoot(document.getElementById('root')!).render(
@@ -17,7 +17,7 @@ createRoot(document.getElementById('root')!).render(
       <Route path="/login" element={<Login />} />
       <Route path="/edit-profile" element={<EditProfile />} />
       <Route path="/change-password" element={<ChangePassword />} />
-      <Route path="/product-listing" element={<ProductListing />} />
+      <Route path="/products" element={<Products />} />
       <Route path="/view-product" element={<ViewProduct />} />
     </Routes>
   </BrowserRouter>,

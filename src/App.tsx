@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import './App.css'
-import { Drawer } from '@mui/material'
+import Navbar from './components/ui/Navbar'
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [loggedIn, isLoggedIn] = useState(false)
+  
   return (
     <>
-      <Drawer/>
+      <Navbar/>
+      {/* {isLoggedIn && <p>Hello</p>} */}
     </>
   )
 }
