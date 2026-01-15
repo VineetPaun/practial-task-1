@@ -4,10 +4,19 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-
-const settings = ["Profile", "Logout"];
+import { useUserStore } from "../../store/userStore";
+import { useNavigate } from "react-router";
 
 export default function Navbar() {
+  const user = useUserStore((state) => state.user);
+  const logout = useUserStore((state) => state.logout);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -38,28 +47,40 @@ export default function Navbar() {
             </Button>
           </Box>
           <Box sx={{ flexGrow: 1, display: "flex" }}>
-            <Button
-              sx={{ my: 2, color: "white", display: "block" }}
-              href="/signup"
-            >
-              Sign Up
-            </Button>
-            <Button
-              sx={{ my: 2, color: "white", display: "block" }}
-              href="/login"
-            >
-              Log In
-            </Button>
+            {!user && (
+              <>
+                <Button
+                  sx={{ my: 2, color: "white", display: "block" }}
+                  href="/signup"
+                >
+                  Sign Up
+                </Button>
+                <Button
+                  sx={{ my: 2, color: "white", display: "block" }}
+                  href="/login"
+                >
+                  Log In
+                </Button>
+              </>
+            )}
           </Box>
           <Box sx={{ flexGrow: 0, display: "flex", gap: 1 }}>
-            {settings.map((setting) => (
-              <Button
-                key={setting}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {setting}
-              </Button>
-            ))}
+            {user && (
+              <>
+                <Button
+                  sx={{ my: 2, color: "white", display: "block" }}
+                  href="/profile"
+                >
+                  Profile
+                </Button>
+                <Button
+                  sx={{ my: 2, color: "white", display: "block" }}
+                  onClick={handleLogout}
+                >
+                  Logout
+                </Button>
+              </>
+            )}
           </Box>
         </Toolbar>
       </Container>

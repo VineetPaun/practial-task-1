@@ -19,6 +19,8 @@ import Navbar from "./ui/Navbar";
 import { signUpSchema, type SignUpInput } from "../utils/schema";
 import bcrypt from "bcryptjs";
 import { v4 as uuid } from "uuid";
+import { useState } from "react";
+import { useUserStore } from "../store/userStore";
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -65,6 +67,11 @@ const saveUsers = (users: any[]) => {
 };
 
 export default function SignUp() {
+  const [alertMessage, setAlertMessage] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
+  const setUser = useUserStore((state) => state.setUser);
   const {
     control,
     handleSubmit,
@@ -87,9 +94,10 @@ export default function SignUp() {
     const users = getUsers();
 
     if (emailValidation(email, users)) {
-      <Alert variant="filled" severity="error">
-        User already exists!!
-      </Alert>;
+      setAlertMessage({
+        type: "error",
+        message: "User already exists!!",
+      });
       return;
     }
 
@@ -102,10 +110,15 @@ export default function SignUp() {
     };
     users.push(newUser);
     saveUsers(users);
+
+    // Store user in Zustand
+    setUser(newUser);
+
+    setAlertMessage({
+      type: "success",
+      message: "Account created successfully!!",
+    });
     console.log("Saved to local storage:", newUser);
-    <Alert variant="filled" severity="success">
-      Account created successfully!!
-    </Alert>;
   };
 
   return (
@@ -118,6 +131,12 @@ export default function SignUp() {
           <Typography component="h1" variant="h4">
             Sign up
           </Typography>
+
+          {alertMessage && (
+            <Alert variant="filled" severity={alertMessage.type}>
+              {alertMessage.message}
+            </Alert>
+          )}
 
           <Box
             component="form"

@@ -1,17 +1,10 @@
-import { useEffect, useState } from "react";
 import "./App.css";
 import Navbar from "./components/ui/Navbar";
 import { Typography, Container, Box } from "@mui/material";
+import { useUserStore } from "./store/userStore";
 
 function App() {
-  const [user, setUser] = useState<any>(null);
-
-  useEffect(() => {
-    const storedUser = localStorage.getItem("currentUser");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
+  const user = useUserStore((state) => state.user);
 
   return (
     <>

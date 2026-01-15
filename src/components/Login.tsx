@@ -21,6 +21,7 @@ import bcrypt from "bcryptjs";
 import { getUsers } from "./Signup";
 import { useNavigate } from "react-router";
 import { useState } from "react";
+import { useUserStore } from "../store/userStore";
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -55,6 +56,7 @@ export default function Login() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const navigate = useNavigate();
+  const setUser = useUserStore((state) => state.setUser);
 
   const {
     control,
@@ -91,7 +93,7 @@ export default function Login() {
       return;
     }
 
-    localStorage.setItem("currentUser", JSON.stringify(user));
+    setUser(user);
     setSuccessMessage("Logged in successfully!!");
     setTimeout(() => navigate("/"), 1000);
   };
