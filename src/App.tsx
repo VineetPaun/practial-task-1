@@ -7,8 +7,10 @@ import {
   Card,
   CardContent,
   Grid,
+  CardActionArea,
 } from "@mui/material";
 import { useUserStore } from "./store/userStore";
+import { useNavigate } from "react-router";
 import styles from "./App.module.css";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PersonIcon from "@mui/icons-material/Person";
@@ -16,6 +18,7 @@ import SpeedIcon from "@mui/icons-material/Speed";
 
 function App() {
   const user = useUserStore((state) => state.user);
+  const navigate = useNavigate();
 
   const features = [
     {
@@ -23,18 +26,21 @@ function App() {
       title: "Browse Products",
       description:
         "Explore our extensive catalog of products with detailed information and reviews.",
+      link: "/products",
     },
     {
       icon: <PersonIcon sx={{ fontSize: 48, color: "#1976d2" }} />,
       title: "User Profiles",
       description:
         "Manage your account, update your details, and track your preferences.",
+      link: user ? "/profile" : "/signup",
     },
     {
       icon: <SpeedIcon sx={{ fontSize: 48, color: "#1976d2" }} />,
       title: "Fast & Responsive",
       description:
         "Enjoy a seamless experience with our optimized and responsive design.",
+      link: "/products",
     },
   ];
 
@@ -105,18 +111,20 @@ function App() {
           {features.map((feature, index) => (
             <Grid size={{ xs: 12, md: 4 }} key={index}>
               <Card className={styles.featureCard}>
-                <CardContent className={styles.featureCardContent}>
-                  <Box className={styles.featureIcon}>{feature.icon}</Box>
-                  <Typography variant="h6" className={styles.featureTitle}>
-                    {feature.title}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    className={styles.featureDescription}
-                  >
-                    {feature.description}
-                  </Typography>
-                </CardContent>
+                <CardActionArea onClick={() => navigate(feature.link)}>
+                  <CardContent className={styles.featureCardContent}>
+                    <Box className={styles.featureIcon}>{feature.icon}</Box>
+                    <Typography variant="h6" className={styles.featureTitle}>
+                      {feature.title}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      className={styles.featureDescription}
+                    >
+                      {feature.description}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
               </Card>
             </Grid>
           ))}
