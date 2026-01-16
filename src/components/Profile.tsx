@@ -235,7 +235,7 @@ export default function Profile() {
               type="password"
               fullWidth
               variant="standard"
-              // defaultValue={user?.email || ""}
+              autoComplete="off"
             />
             <TextField
               required
@@ -246,7 +246,7 @@ export default function Profile() {
               type="password"
               fullWidth
               variant="standard"
-              // defaultValue={user?.email || ""}
+              autoComplete="new-password"
             />
             <TextField
               required
@@ -257,7 +257,7 @@ export default function Profile() {
               type="password"
               fullWidth
               variant="standard"
-              // defaultValue={user?.email || ""}
+              autoComplete="new-password"
             />
           </form>
         </DialogContent>

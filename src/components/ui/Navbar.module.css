@@ -13,7 +13,7 @@
   letter-spacing: 0.3rem;
   color: var(--color-text-inverse);
   text-decoration: none;
-  margin-right: var(--spacing-md);
+  margin-right: 48px;
 }
 
 .logo:hover {

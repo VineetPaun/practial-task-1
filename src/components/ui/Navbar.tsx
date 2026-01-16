@@ -28,6 +28,7 @@ export default function Navbar() {
             component="a"
             href="/"
             className={styles.logo}
+            sx={{ mr: 6 }}
           >
             CRUD
           </Typography>

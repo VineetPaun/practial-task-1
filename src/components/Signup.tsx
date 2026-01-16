@@ -161,7 +161,6 @@ export default function SignUp() {
                     {...field}
                     value={field.value ?? ""}
                     error={!!errors.lastName}
-                    helperText={errors.lastName?.message}
                   />
                 )}
               />
@@ -214,8 +213,8 @@ export default function SignUp() {
                     {...field}
                     value={field.value ?? ""}
                     type="password"
+                    autoComplete="new-password"
                     error={!!errors.password}
-                    helperText={errors.password?.message}
                   />
                 )}
               />
@@ -234,8 +233,8 @@ export default function SignUp() {
                     {...field}
                     value={field.value ?? ""}
                     type="password"
+                    autoComplete="new-password"
                     error={!!errors.confirmPassword}
-                    helperText={errors.confirmPassword?.message}
                     className={styles.textField}
                   />
                 )}

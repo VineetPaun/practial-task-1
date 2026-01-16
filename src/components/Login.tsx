@@ -123,6 +123,7 @@ export default function Login() {
                     {...field}
                     value={field.value ?? ""}
                     type="email"
+                    autoComplete="off"
                     error={!!errors.email}
                     helperText={errors.email?.message}
                   />
@@ -141,6 +142,7 @@ export default function Login() {
                     {...field}
                     value={field.value ?? ""}
                     type="password"
+                    autoComplete="off"
                     error={!!errors.password}
                     helperText={errors.password?.message}
                   />
