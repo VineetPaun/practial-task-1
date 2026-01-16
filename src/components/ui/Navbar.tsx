@@ -33,17 +33,29 @@ export default function Navbar() {
           </Typography>
 
           <Box className={styles.navLinksContainer}>
-            <Button className={styles.navButton} href="/products">
+            <Button
+              className={styles.navButton}
+              href="/products"
+              sx={{ color: "white" }}
+            >
               Products
             </Button>
           </Box>
           <Box className={styles.authLinksContainer}>
             {!user && (
               <>
-                <Button className={styles.navButton} href="/signup">
+                <Button
+                  className={styles.navButton}
+                  href="/signup"
+                  sx={{ color: "white" }}
+                >
                   Sign Up
                 </Button>
-                <Button className={styles.navButton} href="/login">
+                <Button
+                  className={styles.navButton}
+                  href="/login"
+                  sx={{ color: "white" }}
+                >
                   Log In
                 </Button>
               </>
@@ -52,10 +64,18 @@ export default function Navbar() {
           <Box className={styles.userActionsContainer}>
             {user && (
               <>
-                <Button className={styles.navButton} href="/profile">
+                <Button
+                  className={styles.navButton}
+                  href="/profile"
+                  sx={{ color: "white" }}
+                >
                   Profile
                 </Button>
-                <Button className={styles.navButton} onClick={handleLogout}>
+                <Button
+                  className={styles.navButton}
+                  onClick={handleLogout}
+                  sx={{ color: "white" }}
+                >
                   Logout
                 </Button>
               </>
