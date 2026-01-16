@@ -33,26 +33,17 @@ export default function Navbar() {
           </Typography>
 
           <Box className={styles.navLinksContainer}>
-            <Button
-              className={styles.navButton}
-              href="/products"
-            >
+            <Button className={styles.navButton} href="/products">
               Products
             </Button>
           </Box>
           <Box className={styles.authLinksContainer}>
             {!user && (
               <>
-                <Button
-                  className={styles.navButton}
-                  href="/signup"
-                >
+                <Button className={styles.navButton} href="/signup">
                   Sign Up
                 </Button>
-                <Button
-                  className={styles.navButton}
-                  href="/login"
-                >
+                <Button className={styles.navButton} href="/login">
                   Log In
                 </Button>
               </>
@@ -61,16 +52,10 @@ export default function Navbar() {
           <Box className={styles.userActionsContainer}>
             {user && (
               <>
-                <Button
-                  className={styles.navButton}
-                  href="/profile"
-                >
+                <Button className={styles.navButton} href="/profile">
                   Profile
                 </Button>
-                <Button
-                  className={styles.navButton}
-                  onClick={handleLogout}
-                >
+                <Button className={styles.navButton} onClick={handleLogout}>
                   Logout
                 </Button>
               </>

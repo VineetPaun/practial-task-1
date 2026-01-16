@@ -119,7 +119,11 @@ export default function SignUp() {
           </Typography>
 
           {alertMessage && (
-            <Alert variant="filled" severity={alertMessage.type} className={styles.alert}>
+            <Alert
+              variant="filled"
+              severity={alertMessage.type}
+              className={styles.alert}
+            >
               {alertMessage.message}
             </Alert>
           )}
@@ -219,7 +223,9 @@ export default function SignUp() {
 
             {/* Confirm Password */}
             <FormControl className={styles.formControl}>
-              <FormLabel className={styles.formLabel}>Confirm Password</FormLabel>
+              <FormLabel className={styles.formLabel}>
+                Confirm Password
+              </FormLabel>
               <Controller
                 name="confirmPassword"
                 control={control}
@@ -236,7 +242,12 @@ export default function SignUp() {
               />
             </FormControl>
 
-            <Button type="submit" variant="contained" fullWidth className={styles.submitButton}>
+            <Button
+              type="submit"
+              variant="contained"
+              fullWidth
+              className={styles.submitButton}
+            >
               Sign up
             </Button>
           </Box>
@@ -244,7 +255,10 @@ export default function SignUp() {
           <Divider className={styles.divider} />
 
           <Typography className={styles.footerText}>
-            Already have an account? <Link href="/login" className={styles.link}>Log in</Link>
+            Already have an account?{" "}
+            <Link href="/login" className={styles.link}>
+              Log in
+            </Link>
           </Typography>
         </Card>
       </div>

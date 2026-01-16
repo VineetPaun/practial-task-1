@@ -189,10 +189,7 @@ export default function ViewProduct() {
                 </Typography>
                 {product.discountPercentage > 0 && (
                   <>
-                    <Typography
-                      variant="h6"
-                      className={styles.originalPrice}
-                    >
+                    <Typography variant="h6" className={styles.originalPrice}>
                       ${product.price}
                     </Typography>
                     <Chip
@@ -222,13 +219,17 @@ export default function ViewProduct() {
               <Typography variant="body2" className={styles.detailLabel}>
                 SKU
               </Typography>
-              <Typography variant="body1" className={styles.detailValue}>{product.sku}</Typography>
+              <Typography variant="body1" className={styles.detailValue}>
+                {product.sku}
+              </Typography>
             </Box>
             <Box className={styles.detailItem}>
               <Typography variant="body2" className={styles.detailLabel}>
                 Weight
               </Typography>
-              <Typography variant="body1" className={styles.detailValue}>{product.weight} g</Typography>
+              <Typography variant="body1" className={styles.detailValue}>
+                {product.weight} g
+              </Typography>
             </Box>
             <Box className={styles.detailItem}>
               <Typography variant="body2" className={styles.detailLabel}>
@@ -259,7 +260,9 @@ export default function ViewProduct() {
               <Typography variant="body2" className={styles.detailLabel}>
                 Return Policy
               </Typography>
-              <Typography variant="body1" className={styles.detailValue}>{product.returnPolicy}</Typography>
+              <Typography variant="body1" className={styles.detailValue}>
+                {product.returnPolicy}
+              </Typography>
             </Box>
           </Box>
 
@@ -320,17 +323,30 @@ export default function ViewProduct() {
               </Typography>
               <Box className={styles.reviewsContainer}>
                 {product.reviews.map((review, index) => (
-                  <Paper key={index} variant="outlined" className={styles.reviewCard}>
+                  <Paper
+                    key={index}
+                    variant="outlined"
+                    className={styles.reviewCard}
+                  >
                     <Box className={styles.reviewHeader}>
-                      <Typography variant="subtitle1" className={styles.reviewerName}>
+                      <Typography
+                        variant="subtitle1"
+                        className={styles.reviewerName}
+                      >
                         {review.reviewerName}
                       </Typography>
-                      <Typography variant="caption" className={styles.reviewDate}>
+                      <Typography
+                        variant="caption"
+                        className={styles.reviewDate}
+                      >
                         {new Date(review.date).toLocaleDateString()}
                       </Typography>
                     </Box>
                     <Rating value={review.rating} size="small" readOnly />
-                    <Typography variant="body2" className={styles.reviewComment}>
+                    <Typography
+                      variant="body2"
+                      className={styles.reviewComment}
+                    >
                       {review.comment}
                     </Typography>
                   </Paper>

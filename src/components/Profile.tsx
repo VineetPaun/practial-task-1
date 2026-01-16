@@ -136,17 +136,13 @@ export default function Profile() {
             <Table aria-label="user info table">
               <TableBody>
                 <TableRow className={styles.tableRow}>
-                  <TableCell className={styles.tableLabel}>
-                    Name
-                  </TableCell>
+                  <TableCell className={styles.tableLabel}>Name</TableCell>
                   <TableCell className={styles.tableValue}>{`${
                     user?.firstName || ""
                   } ${user?.lastName || ""}`}</TableCell>
                 </TableRow>
                 <TableRow className={styles.tableRow}>
-                  <TableCell className={styles.tableLabel}>
-                    Email
-                  </TableCell>
+                  <TableCell className={styles.tableLabel}>Email</TableCell>
                   <TableCell className={styles.tableValue}>
                     {user?.email || ""}
                   </TableCell>
@@ -183,7 +179,9 @@ export default function Profile() {
         </Paper>
       </Box>
       <Dialog open={openEmail} onClose={handleCloseEmail}>
-        <DialogTitle className={styles.dialogTitle}>Change Email Address</DialogTitle>
+        <DialogTitle className={styles.dialogTitle}>
+          Change Email Address
+        </DialogTitle>
         <DialogContent className={styles.dialogContent}>
           {error && (
             <Alert severity="error" className={styles.alertError}>
@@ -212,8 +210,14 @@ export default function Profile() {
           </Button>
         </DialogActions>
       </Dialog>
-      <Dialog open={openPass} onClose={handleClosePass} className={styles.dialog}>
-        <DialogTitle className={styles.dialogTitle}>Change Password</DialogTitle>
+      <Dialog
+        open={openPass}
+        onClose={handleClosePass}
+        className={styles.dialog}
+      >
+        <DialogTitle className={styles.dialogTitle}>
+          Change Password
+        </DialogTitle>
         <DialogContent className={styles.dialogContent}>
           {error && (
             <Alert severity="error" className={styles.alertError}>

@@ -148,7 +148,12 @@ export default function Login() {
               />
             </FormControl>
 
-            <Button type="submit" variant="contained" fullWidth className={styles.submitButton}>
+            <Button
+              type="submit"
+              variant="contained"
+              fullWidth
+              className={styles.submitButton}
+            >
               Log in
             </Button>
           </Box>

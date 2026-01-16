@@ -84,12 +84,24 @@ export default function Products() {
           <TableHead className={styles.tableHead}>
             <TableRow>
               <TableCell className={styles.tableHeadCell}>Image</TableCell>
-              <TableCell className={styles.tableHeadCell}>Product Name</TableCell>
-              <TableCell align="right" className={styles.tableHeadCell}>Brand</TableCell>
-              <TableCell align="right" className={styles.tableHeadCell}>Category</TableCell>
-              <TableCell align="right" className={styles.tableHeadCell}>Price</TableCell>
-              <TableCell align="right" className={styles.tableHeadCell}>Stock</TableCell>
-              <TableCell align="right" className={styles.tableHeadCell}>Rating</TableCell>
+              <TableCell className={styles.tableHeadCell}>
+                Product Name
+              </TableCell>
+              <TableCell align="right" className={styles.tableHeadCell}>
+                Brand
+              </TableCell>
+              <TableCell align="right" className={styles.tableHeadCell}>
+                Category
+              </TableCell>
+              <TableCell align="right" className={styles.tableHeadCell}>
+                Price
+              </TableCell>
+              <TableCell align="right" className={styles.tableHeadCell}>
+                Stock
+              </TableCell>
+              <TableCell align="right" className={styles.tableHeadCell}>
+                Rating
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -107,14 +119,28 @@ export default function Products() {
                     className={styles.productThumbnail}
                   />
                 </TableCell>
-                <TableCell component="th" scope="row" className={styles.productTitle}>
+                <TableCell
+                  component="th"
+                  scope="row"
+                  className={styles.productTitle}
+                >
                   {product.title}
                 </TableCell>
-                <TableCell align="right" className={styles.productBrand}>{product.brand}</TableCell>
-                <TableCell align="right" className={styles.productCategory}>{product.category}</TableCell>
-                <TableCell align="right" className={styles.productPrice}>${product.price}</TableCell>
-                <TableCell align="right" className={styles.productStock}>{product.stock}</TableCell>
-                <TableCell align="right" className={styles.productRating}>{product.rating}</TableCell>
+                <TableCell align="right" className={styles.productBrand}>
+                  {product.brand}
+                </TableCell>
+                <TableCell align="right" className={styles.productCategory}>
+                  {product.category}
+                </TableCell>
+                <TableCell align="right" className={styles.productPrice}>
+                  ${product.price}
+                </TableCell>
+                <TableCell align="right" className={styles.productStock}>
+                  {product.stock}
+                </TableCell>
+                <TableCell align="right" className={styles.productRating}>
+                  {product.rating}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
