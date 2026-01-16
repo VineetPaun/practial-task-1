@@ -1,0 +1,72 @@
+.appContainer {
+  min-height: 100vh;
+  background-color: var(--color-background);
+}
+
+.contentWrapper {
+  margin-top: var(--spacing-xl);
+  text-align: center;
+  padding: 0 var(--spacing-md);
+}
+
+.welcomeTitle {
+  font-size: var(--font-size-xxxl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.loginPrompt {
+  font-size: var(--font-size-xl);
+  color: var(--color-text-secondary);
+}
+
+/* Responsive Styles */
+@media (max-width: 1199px) {
+  .contentWrapper {
+    margin-top: var(--spacing-lg);
+  }
+
+  .welcomeTitle {
+    font-size: var(--font-size-xxl);
+  }
+}
+
+@media (max-width: 991px) {
+  .welcomeTitle {
+    font-size: var(--font-size-xl);
+  }
+
+  .loginPrompt {
+    font-size: var(--font-size-lg);
+  }
+}
+
+@media (max-width: 767px) {
+  .contentWrapper {
+    margin-top: var(--spacing-md);
+    padding: 0 var(--spacing-sm);
+  }
+
+  .welcomeTitle {
+    font-size: var(--font-size-lg);
+  }
+
+  .loginPrompt {
+    font-size: var(--font-size-md);
+  }
+}
+
+@media (max-width: 575px) {
+  .contentWrapper {
+    margin-top: var(--spacing-sm);
+    padding: 0 var(--spacing-xs);
+  }
+
+  .welcomeTitle {
+    font-size: var(--font-size-md);
+  }
+
+  .loginPrompt {
+    font-size: var(--font-size-sm);
+  }
+}

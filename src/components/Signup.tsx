@@ -8,7 +8,6 @@ import {
   Link,
   TextField,
   Typography,
-  Stack,
   Card as MuiCard,
   Alert,
 } from "@mui/material";
@@ -21,6 +20,7 @@ import bcrypt from "bcryptjs";
 import { v4 as uuid } from "uuid";
 import { useState } from "react";
 import { useUserStore } from "../store/userStore";
+import styles from "./Signup.module.css";
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -31,23 +31,9 @@ const Card = styled(MuiCard)(({ theme }) => ({
   gap: theme.spacing(2),
   margin: "auto",
   boxShadow:
-    "hsla(220, 30%, 5%, 0.05) 0px 5px 15px, hsla(220, 25%, 10%, 0.05) 0px 15px 35px -5px",
+    "0px 5px 15px rgba(0, 0, 0, 0.05), 0px 15px 35px -5px rgba(0, 0, 0, 0.05)",
   [theme.breakpoints.up("sm")]: {
     width: "450px",
-  },
-}));
-
-const SignUpContainer = styled(Stack)(({ theme }) => ({
-  height: "100dvh",
-  padding: theme.spacing(2),
-  justifyContent: "center",
-  "&::before": {
-    content: '""',
-    position: "absolute",
-    inset: 0,
-    zIndex: -1,
-    backgroundImage:
-      "radial-gradient(ellipse at center, hsl(210, 100%, 97%), white)",
   },
 }));
 
@@ -126,14 +112,14 @@ export default function SignUp() {
       <Navbar />
       <CssBaseline />
 
-      <SignUpContainer>
-        <Card variant="outlined">
-          <Typography component="h1" variant="h4">
+      <div className={styles.signupContainer}>
+        <Card variant="outlined" className={styles.card}>
+          <Typography component="h1" variant="h4" className={styles.title}>
             Sign up
           </Typography>
 
           {alertMessage && (
-            <Alert variant="filled" severity={alertMessage.type}>
+            <Alert variant="filled" severity={alertMessage.type} className={styles.alert}>
               {alertMessage.message}
             </Alert>
           )}
@@ -141,11 +127,11 @@ export default function SignUp() {
           <Box
             component="form"
             onSubmit={handleSubmit(onSubmit)}
-            sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+            className={styles.form}
           >
             {/* First Name */}
-            <FormControl>
-              <FormLabel>First name</FormLabel>
+            <FormControl className={styles.formControl}>
+              <FormLabel className={styles.formLabel}>First name</FormLabel>
               <Controller
                 name="firstName"
                 control={control}
@@ -161,8 +147,8 @@ export default function SignUp() {
             </FormControl>
 
             {/* Last Name */}
-            <FormControl>
-              <FormLabel>Last name</FormLabel>
+            <FormControl className={styles.formControl}>
+              <FormLabel className={styles.formLabel}>Last name</FormLabel>
               <Controller
                 name="lastName"
                 control={control}
@@ -178,8 +164,8 @@ export default function SignUp() {
             </FormControl>
 
             {/* Email */}
-            <FormControl>
-              <FormLabel>Email</FormLabel>
+            <FormControl className={styles.formControl}>
+              <FormLabel className={styles.formLabel}>Email</FormLabel>
               <Controller
                 name="email"
                 control={control}
@@ -196,8 +182,8 @@ export default function SignUp() {
             </FormControl>
 
             {/* Phone Number */}
-            <FormControl>
-              <FormLabel>Phone number</FormLabel>
+            <FormControl className={styles.formControl}>
+              <FormLabel className={styles.formLabel}>Phone number</FormLabel>
               <Controller
                 name="phoneNumber"
                 control={control}
@@ -214,8 +200,8 @@ export default function SignUp() {
             </FormControl>
 
             {/* Password */}
-            <FormControl>
-              <FormLabel>Password</FormLabel>
+            <FormControl className={styles.formControl}>
+              <FormLabel className={styles.formLabel}>Password</FormLabel>
               <Controller
                 name="password"
                 control={control}
@@ -232,8 +218,8 @@ export default function SignUp() {
             </FormControl>
 
             {/* Confirm Password */}
-            <FormControl>
-              <FormLabel>Confirm Password</FormLabel>
+            <FormControl className={styles.formControl}>
+              <FormLabel className={styles.formLabel}>Confirm Password</FormLabel>
               <Controller
                 name="confirmPassword"
                 control={control}
@@ -244,23 +230,24 @@ export default function SignUp() {
                     type="password"
                     error={!!errors.confirmPassword}
                     helperText={errors.confirmPassword?.message}
+                    className={styles.textField}
                   />
                 )}
               />
             </FormControl>
 
-            <Button type="submit" variant="contained" fullWidth>
+            <Button type="submit" variant="contained" fullWidth className={styles.submitButton}>
               Sign up
             </Button>
           </Box>
 
-          <Divider />
+          <Divider className={styles.divider} />
 
-          <Typography textAlign="center">
-            Already have an account? <Link href="/login">Log in</Link>
+          <Typography className={styles.footerText}>
+            Already have an account? <Link href="/login" className={styles.link}>Log in</Link>
           </Typography>
         </Card>
-      </SignUpContainer>
+      </div>
     </>
   );
 }

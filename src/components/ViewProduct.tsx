@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Navbar from "./ui/Navbar";
+import styles from "./ViewProduct.module.css";
 
 interface Product {
   id: number;
@@ -82,9 +83,9 @@ export default function ViewProduct() {
 
   if (loading) {
     return (
-      <div>
+      <div className={styles.viewProductContainer}>
         <Navbar />
-        <Box sx={{ display: "flex", justifyContent: "center", mt: 10 }}>
+        <Box className={styles.loadingContainer}>
           <CircularProgress />
         </Box>
       </div>
@@ -93,9 +94,9 @@ export default function ViewProduct() {
 
   if (!product) {
     return (
-      <div>
+      <div className={styles.viewProductContainer}>
         <Navbar />
-        <Box sx={{ display: "flex", justifyContent: "center", mt: 10 }}>
+        <Box className={styles.loadingContainer}>
           <Typography variant="h5">Product not found</Typography>
         </Box>
       </div>
@@ -106,44 +107,35 @@ export default function ViewProduct() {
     product.price - (product.price * product.discountPercentage) / 100;
 
   return (
-    <div>
+    <div className={styles.viewProductContainer}>
       <Navbar />
-      <Box sx={{ maxWidth: 1200, mx: "auto", p: 3 }}>
+      <Box className={styles.contentWrapper}>
         <Button
           startIcon={<ArrowBackIcon />}
           onClick={() => navigate("/products")}
-          sx={{ mb: 2 }}
+          className={styles.backButton}
         >
           Back to Products
         </Button>
-        <Paper elevation={3} sx={{ p: 4 }}>
+        <Paper elevation={3} className={styles.productCard}>
           {/* Header Section */}
-          <Box sx={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
+          <Box className={styles.headerSection}>
             {/* Main Image */}
-            <Box sx={{ flex: "1 1 400px" }}>
+            <Box className={styles.imageSection}>
               <img
                 src={product.thumbnail}
                 alt={product.title}
-                style={{
-                  width: "100%",
-                  maxHeight: 400,
-                  objectFit: "contain",
-                  borderRadius: 8,
-                }}
+                className={styles.mainImage}
               />
               {/* Image Gallery */}
               {product.images && product.images.length > 1 && (
-                <ImageList cols={4} gap={8} sx={{ mt: 2 }}>
+                <ImageList cols={4} gap={8} className={styles.imageGallery}>
                   {product.images.map((img, index) => (
                     <ImageListItem key={index}>
                       <img
                         src={img}
                         alt={`${product.title} ${index + 1}`}
-                        style={{
-                          height: 80,
-                          objectFit: "cover",
-                          borderRadius: 4,
-                        }}
+                        className={styles.galleryImage}
                       />
                     </ImageListItem>
                   ))}
@@ -152,21 +144,19 @@ export default function ViewProduct() {
             </Box>
 
             {/* Product Info */}
-            <Box sx={{ flex: "1 1 400px" }}>
-              <Typography variant="h4" fontWeight="bold" gutterBottom>
+            <Box className={styles.infoSection}>
+              <Typography variant="h4" className={styles.productTitle}>
                 {product.title}
               </Typography>
 
-              <Box
-                sx={{ display: "flex", alignItems: "center", gap: 1, mb: 2 }}
-              >
+              <Box className={styles.ratingContainer}>
                 <Rating value={product.rating} precision={0.1} readOnly />
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body2" className={styles.ratingText}>
                   ({product.rating})
                 </Typography>
               </Box>
 
-              <Box sx={{ display: "flex", gap: 1, mb: 2 }}>
+              <Box className={styles.chipContainer}>
                 <Chip label={product.category} color="primary" size="small" />
                 <Chip label={product.brand} variant="outlined" size="small" />
                 <Chip
@@ -177,9 +167,7 @@ export default function ViewProduct() {
               </Box>
 
               {product.tags && (
-                <Box
-                  sx={{ display: "flex", gap: 0.5, flexWrap: "wrap", mb: 2 }}
-                >
+                <Box className={styles.tagsContainer}>
                   {product.tags.map((tag, index) => (
                     <Chip
                       key={index}
@@ -191,22 +179,19 @@ export default function ViewProduct() {
                 </Box>
               )}
 
-              <Typography variant="body1" color="text.secondary" paragraph>
+              <Typography variant="body1" className={styles.description}>
                 {product.description}
               </Typography>
 
-              <Box
-                sx={{ display: "flex", alignItems: "baseline", gap: 2, mb: 2 }}
-              >
-                <Typography variant="h4" color="primary" fontWeight="bold">
+              <Box className={styles.priceContainer}>
+                <Typography variant="h4" className={styles.discountedPrice}>
                   ${discountedPrice.toFixed(2)}
                 </Typography>
                 {product.discountPercentage > 0 && (
                   <>
                     <Typography
                       variant="h6"
-                      color="text.secondary"
-                      sx={{ textDecoration: "line-through" }}
+                      className={styles.originalPrice}
                     >
                       ${product.price}
                     </Typography>
@@ -219,105 +204,91 @@ export default function ViewProduct() {
                 )}
               </Box>
 
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" className={styles.stockInfo}>
                 Stock: {product.stock} units | Min Order:{" "}
                 {product.minimumOrderQuantity}
               </Typography>
             </Box>
           </Box>
 
-          <Divider sx={{ my: 4 }} />
+          <Divider className={styles.divider} />
 
           {/* Details Section */}
-          <Typography variant="h5" fontWeight="bold" gutterBottom>
+          <Typography variant="h5" className={styles.sectionTitle}>
             Product Details
           </Typography>
-          <Box
-            sx={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-              gap: 2,
-              mb: 4,
-            }}
-          >
-            <Box>
-              <Typography variant="body2" color="text.secondary">
+          <Box className={styles.detailsGrid}>
+            <Box className={styles.detailItem}>
+              <Typography variant="body2" className={styles.detailLabel}>
                 SKU
               </Typography>
-              <Typography variant="body1">{product.sku}</Typography>
+              <Typography variant="body1" className={styles.detailValue}>{product.sku}</Typography>
             </Box>
-            <Box>
-              <Typography variant="body2" color="text.secondary">
+            <Box className={styles.detailItem}>
+              <Typography variant="body2" className={styles.detailLabel}>
                 Weight
               </Typography>
-              <Typography variant="body1">{product.weight} g</Typography>
+              <Typography variant="body1" className={styles.detailValue}>{product.weight} g</Typography>
             </Box>
-            <Box>
-              <Typography variant="body2" color="text.secondary">
+            <Box className={styles.detailItem}>
+              <Typography variant="body2" className={styles.detailLabel}>
                 Dimensions (W x H x D)
               </Typography>
-              <Typography variant="body1">
+              <Typography variant="body1" className={styles.detailValue}>
                 {product.dimensions?.width} x {product.dimensions?.height} x{" "}
                 {product.dimensions?.depth} cm
               </Typography>
             </Box>
-            <Box>
-              <Typography variant="body2" color="text.secondary">
+            <Box className={styles.detailItem}>
+              <Typography variant="body2" className={styles.detailLabel}>
                 Warranty
               </Typography>
               <Typography variant="body1">
                 {product.warrantyInformation}
               </Typography>
             </Box>
-            <Box>
-              <Typography variant="body2" color="text.secondary">
+            <Box className={styles.detailItem}>
+              <Typography variant="body2" className={styles.detailLabel}>
                 Shipping
               </Typography>
-              <Typography variant="body1">
+              <Typography variant="body1" className={styles.detailValue}>
                 {product.shippingInformation}
               </Typography>
             </Box>
-            <Box>
-              <Typography variant="body2" color="text.secondary">
+            <Box className={styles.detailItem}>
+              <Typography variant="body2" className={styles.detailLabel}>
                 Return Policy
               </Typography>
-              <Typography variant="body1">{product.returnPolicy}</Typography>
+              <Typography variant="body1" className={styles.detailValue}>{product.returnPolicy}</Typography>
             </Box>
           </Box>
 
           {/* Meta Info */}
           {product.meta && (
             <>
-              <Divider sx={{ my: 4 }} />
-              <Typography variant="h5" fontWeight="bold" gutterBottom>
+              <Divider className={styles.divider} />
+              <Typography variant="h5" className={styles.sectionTitle}>
                 Additional Information
               </Typography>
-              <Box
-                sx={{
-                  display: "flex",
-                  gap: 4,
-                  flexWrap: "wrap",
-                  alignItems: "center",
-                }}
-              >
-                <Box>
-                  <Typography variant="body2" color="text.secondary">
+              <Box className={styles.metaSection}>
+                <Box className={styles.detailItem}>
+                  <Typography variant="body2" className={styles.detailLabel}>
                     Barcode
                   </Typography>
-                  <Typography variant="body1">
+                  <Typography variant="body1" className={styles.detailValue}>
                     {product.meta.barcode}
                   </Typography>
                 </Box>
-                <Box>
-                  <Typography variant="body2" color="text.secondary">
+                <Box className={styles.detailItem}>
+                  <Typography variant="body2" className={styles.detailLabel}>
                     Created At
                   </Typography>
-                  <Typography variant="body1">
+                  <Typography variant="body1" className={styles.detailValue}>
                     {new Date(product.meta.createdAt).toLocaleDateString()}
                   </Typography>
                 </Box>
-                <Box>
-                  <Typography variant="body2" color="text.secondary">
+                <Box className={styles.detailItem}>
+                  <Typography variant="body2" className={styles.detailLabel}>
                     Updated At
                   </Typography>
                   <Typography variant="body1">
@@ -325,14 +296,14 @@ export default function ViewProduct() {
                   </Typography>
                 </Box>
                 {product.meta.qrCode && (
-                  <Box>
-                    <Typography variant="body2" color="text.secondary">
+                  <Box className={styles.detailItem}>
+                    <Typography variant="body2" className={styles.detailLabel}>
                       QR Code
                     </Typography>
                     <img
                       src={product.meta.qrCode}
                       alt="QR Code"
-                      style={{ width: 80, height: 80 }}
+                      className={styles.qrCode}
                     />
                   </Box>
                 )}
@@ -343,30 +314,23 @@ export default function ViewProduct() {
           {/* Reviews Section */}
           {product.reviews && product.reviews.length > 0 && (
             <>
-              <Divider sx={{ my: 4 }} />
-              <Typography variant="h5" fontWeight="bold" gutterBottom>
+              <Divider className={styles.divider} />
+              <Typography variant="h5" className={styles.sectionTitle}>
                 Customer Reviews ({product.reviews.length})
               </Typography>
-              <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+              <Box className={styles.reviewsContainer}>
                 {product.reviews.map((review, index) => (
-                  <Paper key={index} variant="outlined" sx={{ p: 2 }}>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        mb: 1,
-                      }}
-                    >
-                      <Typography variant="subtitle1" fontWeight="bold">
+                  <Paper key={index} variant="outlined" className={styles.reviewCard}>
+                    <Box className={styles.reviewHeader}>
+                      <Typography variant="subtitle1" className={styles.reviewerName}>
                         {review.reviewerName}
                       </Typography>
-                      <Typography variant="caption" color="text.secondary">
+                      <Typography variant="caption" className={styles.reviewDate}>
                         {new Date(review.date).toLocaleDateString()}
                       </Typography>
                     </Box>
                     <Rating value={review.rating} size="small" readOnly />
-                    <Typography variant="body2" sx={{ mt: 1 }}>
+                    <Typography variant="body2" className={styles.reviewComment}>
                       {review.comment}
                     </Typography>
                   </Paper>

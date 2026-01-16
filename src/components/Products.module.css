@@ -1,0 +1,116 @@
+.productsContainer {
+  min-height: 100vh;
+  background-color: var(--color-background);
+}
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: var(--spacing-xxl);
+}
+
+.tableContainer {
+  margin: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-medium);
+  overflow: hidden;
+}
+
+.table {
+  min-width: 650px;
+}
+
+.tableHead {
+  background-color: var(--color-primary);
+}
+
+.tableHeadCell {
+  color: var(--color-text-inverse) !important;
+  font-weight: var(--font-weight-bold) !important;
+}
+
+.tableRow {
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.tableRow:hover {
+  background-color: var(--color-background);
+}
+
+.productThumbnail {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: var(--border-radius-sm);
+}
+
+.productTitle {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+.productBrand,
+.productCategory {
+  color: var(--color-text-secondary);
+}
+
+.productPrice {
+  color: var(--color-success);
+  font-weight: var(--font-weight-semibold);
+}
+
+.productStock {
+  color: var(--color-text-secondary);
+}
+
+.productRating {
+  color: var(--color-warning);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Responsive Styles */
+@media (max-width: 1199px) {
+  .tableContainer {
+    margin: var(--spacing-sm);
+  }
+}
+
+@media (max-width: 991px) {
+  .table {
+    min-width: 500px;
+  }
+}
+
+@media (max-width: 767px) {
+  .tableContainer {
+    margin: var(--spacing-xs);
+    overflow-x: auto;
+  }
+
+  .table {
+    min-width: 400px;
+  }
+
+  .productThumbnail {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 575px) {
+  .tableContainer {
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .table {
+    min-width: 350px;
+  }
+
+  .productThumbnail {
+    width: 35px;
+    height: 35px;
+  }
+}

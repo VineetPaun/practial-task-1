@@ -1,0 +1,28 @@
+/* 
+  Breakpoint Reference:
+  - Main screen (desktop): 1920px
+  - Large desktop: max-width 1199px
+  - Tablet landscape: max-width 991px
+  - Tablet portrait: max-width 767px
+  - Mobile: max-width 575px
+*/
+
+/* Example usage in component CSS files:
+
+@media (max-width: 1199px) {
+  // Large desktop styles
+}
+
+@media (max-width: 991px) {
+  // Tablet landscape styles
+}
+
+@media (max-width: 767px) {
+  // Tablet portrait styles
+}
+
+@media (max-width: 575px) {
+  // Mobile styles
+}
+
+*/

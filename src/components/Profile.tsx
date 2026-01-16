@@ -16,6 +16,7 @@ import { useState } from "react";
 import Alert from "@mui/material/Alert";
 import { getUsers } from "./Signup";
 import bcrypt from "bcryptjs";
+import styles from "./Profile.module.css";
 
 export default function Profile() {
   const user = useUserStore((state) => state.user);
@@ -121,45 +122,32 @@ export default function Profile() {
   };
 
   return (
-    <div>
+    <div className={styles.profileContainer}>
       <Navbar />
-      <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
-        <Paper elevation={3} sx={{ width: "100%", maxWidth: 600, p: 3 }}>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              mb: 2,
-            }}
-          >
-            <Typography variant="h5" fontWeight="bold">
+      <Box className={styles.contentWrapper}>
+        <Paper elevation={3} className={styles.profileCard}>
+          <Box className={styles.header}>
+            <Typography variant="h5" className={styles.headerTitle}>
               Profile Details
             </Typography>
           </Box>
-          <Divider sx={{ mb: 2 }} />
-          <TableContainer>
+          <Divider className={styles.divider} />
+          <TableContainer className={styles.tableContainer}>
             <Table aria-label="user info table">
               <TableBody>
-                <TableRow>
-                  <TableCell
-                    sx={{
-                      fontWeight: "bold",
-                      borderBottom: "none",
-                      width: "40%",
-                    }}
-                  >
+                <TableRow className={styles.tableRow}>
+                  <TableCell className={styles.tableLabel}>
                     Name
                   </TableCell>
-                  <TableCell sx={{ borderBottom: "none" }}>{`${
+                  <TableCell className={styles.tableValue}>{`${
                     user?.firstName || ""
                   } ${user?.lastName || ""}`}</TableCell>
                 </TableRow>
-                <TableRow>
-                  <TableCell sx={{ fontWeight: "bold", borderBottom: "none" }}>
+                <TableRow className={styles.tableRow}>
+                  <TableCell className={styles.tableLabel}>
                     Email
                   </TableCell>
-                  <TableCell sx={{ borderBottom: "none" }}>
+                  <TableCell className={styles.tableValue}>
                     {user?.email || ""}
                   </TableCell>
                   <Button
@@ -167,15 +155,16 @@ export default function Profile() {
                     color="primary"
                     size="small"
                     onClick={handleClickOpenEmail}
+                    className={styles.editButton}
                   >
                     Edit
                   </Button>
                 </TableRow>
-                <TableRow>
-                  <TableCell sx={{ fontWeight: "bold", borderBottom: "none" }}>
+                <TableRow className={styles.tableRow}>
+                  <TableCell className={styles.tableLabel}>
                     Phone Number
                   </TableCell>
-                  <TableCell sx={{ borderBottom: "none" }}>
+                  <TableCell className={styles.tableValue}>
                     {user?.phoneNumber || ""}
                   </TableCell>
                 </TableRow>
@@ -187,16 +176,17 @@ export default function Profile() {
             color="primary"
             size="small"
             onClick={handleClickOpenPass}
+            className={styles.changePasswordButton}
           >
             Change Password
           </Button>
         </Paper>
       </Box>
       <Dialog open={openEmail} onClose={handleCloseEmail}>
-        <DialogTitle>Change Email Address</DialogTitle>
-        <DialogContent>
+        <DialogTitle className={styles.dialogTitle}>Change Email Address</DialogTitle>
+        <DialogContent className={styles.dialogContent}>
           {error && (
-            <Alert severity="error" sx={{ mb: 2 }}>
+            <Alert severity="error" className={styles.alertError}>
               {error}
             </Alert>
           )}
@@ -222,11 +212,11 @@ export default function Profile() {
           </Button>
         </DialogActions>
       </Dialog>
-      <Dialog open={openPass} onClose={handleClosePass}>
-        <DialogTitle>Change Password</DialogTitle>
-        <DialogContent>
+      <Dialog open={openPass} onClose={handleClosePass} className={styles.dialog}>
+        <DialogTitle className={styles.dialogTitle}>Change Password</DialogTitle>
+        <DialogContent className={styles.dialogContent}>
           {error && (
-            <Alert severity="error" sx={{ mb: 2 }}>
+            <Alert severity="error" className={styles.alertError}>
               {error}
             </Alert>
           )}

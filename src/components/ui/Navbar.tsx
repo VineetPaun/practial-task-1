@@ -6,6 +6,7 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import { useUserStore } from "../../store/userStore";
 import { useNavigate } from "react-router";
+import styles from "./Navbar.module.css";
 
 export default function Navbar() {
   const user = useUserStore((state) => state.user);
@@ -18,45 +19,38 @@ export default function Navbar() {
   };
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
+    <AppBar position="static" className={styles.navbar}>
+      <Container maxWidth="xl" className={styles.container}>
         <Toolbar disableGutters>
           <Typography
             variant="h6"
             noWrap
             component="a"
             href="/"
-            sx={{
-              mr: 2,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
+            className={styles.logo}
           >
             CRUD
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: "flex" }}>
+          <Box className={styles.navLinksContainer}>
             <Button
-              sx={{ my: 2, color: "white", display: "block" }}
+              className={styles.navButton}
               href="/products"
             >
               Products
             </Button>
           </Box>
-          <Box sx={{ flexGrow: 1, display: "flex" }}>
+          <Box className={styles.authLinksContainer}>
             {!user && (
               <>
                 <Button
-                  sx={{ my: 2, color: "white", display: "block" }}
+                  className={styles.navButton}
                   href="/signup"
                 >
                   Sign Up
                 </Button>
                 <Button
-                  sx={{ my: 2, color: "white", display: "block" }}
+                  className={styles.navButton}
                   href="/login"
                 >
                   Log In
@@ -64,17 +58,17 @@ export default function Navbar() {
               </>
             )}
           </Box>
-          <Box sx={{ flexGrow: 0, display: "flex", gap: 1 }}>
+          <Box className={styles.userActionsContainer}>
             {user && (
               <>
                 <Button
-                  sx={{ my: 2, color: "white", display: "block" }}
+                  className={styles.navButton}
                   href="/profile"
                 >
                   Profile
                 </Button>
                 <Button
-                  sx={{ my: 2, color: "white", display: "block" }}
+                  className={styles.navButton}
                   onClick={handleLogout}
                 >
                   Logout

@@ -1,0 +1,143 @@
+.signupContainer {
+  height: 100dvh;
+  padding: var(--spacing-md);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.signupContainer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(ellipse at center, #e3f2fd, #ffffff);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  width: 100%;
+  max-width: 450px;
+  padding: var(--spacing-xl);
+  gap: var(--spacing-md);
+  margin: auto;
+  background-color: var(--color-surface);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-medium);
+}
+
+.title {
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.formControl {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.formLabel {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+.textField {
+  width: 100%;
+}
+
+.submitButton {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--border-radius-sm);
+  transition: background-color var(--transition-fast);
+}
+
+.submitButton:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.divider {
+  margin: var(--spacing-md) 0;
+}
+
+.footerText {
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+
+.link {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.alert {
+  border-radius: var(--border-radius-sm);
+}
+
+/* Responsive Styles */
+@media (max-width: 1199px) {
+  .card {
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 991px) {
+  .card {
+    max-width: 400px;
+    padding: var(--spacing-lg);
+  }
+}
+
+@media (max-width: 767px) {
+  .signupContainer {
+    padding: var(--spacing-sm);
+  }
+
+  .card {
+    max-width: 100%;
+    padding: var(--spacing-md);
+  }
+
+  .title {
+    font-size: var(--font-size-xl);
+  }
+}
+
+@media (max-width: 575px) {
+  .signupContainer {
+    padding: var(--spacing-xs);
+  }
+
+  .card {
+    padding: var(--spacing-sm);
+    gap: var(--spacing-sm);
+    border-radius: var(--border-radius-sm);
+  }
+
+  .title {
+    font-size: var(--font-size-lg);
+  }
+
+  .form {
+    gap: var(--spacing-sm);
+  }
+}

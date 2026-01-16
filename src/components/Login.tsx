@@ -8,7 +8,6 @@ import {
   Link,
   TextField,
   Typography,
-  Stack,
   Card as MuiCard,
   Alert,
 } from "@mui/material";
@@ -22,6 +21,7 @@ import { getUsers } from "./Signup";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 import { useUserStore } from "../store/userStore";
+import styles from "./Login.module.css";
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -32,23 +32,9 @@ const Card = styled(MuiCard)(({ theme }) => ({
   gap: theme.spacing(2),
   margin: "auto",
   boxShadow:
-    "hsla(220, 30%, 5%, 0.05) 0px 5px 15px, hsla(220, 25%, 10%, 0.05) 0px 15px 35px -5px",
+    "0px 5px 15px rgba(0, 0, 0, 0.05), 0px 15px 35px -5px rgba(0, 0, 0, 0.05)",
   [theme.breakpoints.up("sm")]: {
     width: "450px",
-  },
-}));
-
-const SignUpContainer = styled(Stack)(({ theme }) => ({
-  height: "100dvh",
-  padding: theme.spacing(2),
-  justifyContent: "center",
-  "&::before": {
-    content: '""',
-    position: "absolute",
-    inset: 0,
-    zIndex: -1,
-    backgroundImage:
-      "radial-gradient(ellipse at center, hsl(210, 100%, 97%), white)",
   },
 }));
 
@@ -103,20 +89,20 @@ export default function Login() {
       <Navbar />
       <CssBaseline />
 
-      <SignUpContainer>
-        <Card variant="outlined">
-          <Typography component="h1" variant="h4">
+      <div className={styles.loginContainer}>
+        <Card variant="outlined" className={styles.card}>
+          <Typography component="h1" variant="h4" className={styles.title}>
             Log in
           </Typography>
 
           {errorMessage && (
-            <Alert variant="filled" severity="error">
+            <Alert variant="filled" severity="error" className={styles.alert}>
               {errorMessage}
             </Alert>
           )}
 
           {successMessage && (
-            <Alert variant="filled" severity="success">
+            <Alert variant="filled" severity="success" className={styles.alert}>
               {successMessage}
             </Alert>
           )}
@@ -124,11 +110,11 @@ export default function Login() {
           <Box
             component="form"
             onSubmit={handleSubmit(onSubmit)}
-            sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+            className={styles.form}
           >
             {/* Email */}
-            <FormControl>
-              <FormLabel>Email</FormLabel>
+            <FormControl className={styles.formControl}>
+              <FormLabel className={styles.formLabel}>Email</FormLabel>
               <Controller
                 name="email"
                 control={control}
@@ -145,8 +131,8 @@ export default function Login() {
             </FormControl>
 
             {/* Password */}
-            <FormControl>
-              <FormLabel>Password</FormLabel>
+            <FormControl className={styles.formControl}>
+              <FormLabel className={styles.formLabel}>Password</FormLabel>
               <Controller
                 name="password"
                 control={control}
@@ -162,18 +148,18 @@ export default function Login() {
               />
             </FormControl>
 
-            <Button type="submit" variant="contained" fullWidth>
+            <Button type="submit" variant="contained" fullWidth className={styles.submitButton}>
               Log in
             </Button>
           </Box>
 
-          <Divider />
+          <Divider className={styles.divider} />
 
-          <Typography textAlign="center">
+          <Typography textAlign="center" className={styles.footerText}>
             Don't have an account? <Link href="/signup">Sign up</Link>
           </Typography>
         </Card>
-      </SignUpContainer>
+      </div>
     </>
   );
 }

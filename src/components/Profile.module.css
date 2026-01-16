@@ -1,0 +1,161 @@
+.profileContainer {
+  min-height: 100vh;
+  background-color: var(--color-background);
+}
+
+.contentWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--spacing-xxl);
+  padding: 0 var(--spacing-md);
+}
+
+.profileCard {
+  width: 100%;
+  max-width: 600px;
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-medium);
+  background-color: var(--color-surface);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.headerTitle {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.divider {
+  margin-bottom: var(--spacing-md);
+}
+
+.tableContainer {
+  margin-bottom: var(--spacing-md);
+}
+
+.tableRow {
+  border-bottom: none;
+}
+
+.tableLabel {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  width: 40%;
+}
+
+.tableValue {
+  color: var(--color-text-secondary);
+}
+
+.editButton {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+
+.editButton:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.changePasswordButton {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+  margin-top: var(--spacing-md);
+}
+
+.changePasswordButton:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.dialogTitle {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+.dialogContent {
+  min-width: 300px;
+}
+
+.alertError {
+  margin-bottom: var(--spacing-md);
+}
+
+.textField {
+  margin-top: var(--spacing-sm);
+}
+
+.dialogActions {
+  padding: var(--spacing-md);
+}
+
+.cancelButton {
+  color: var(--color-text-secondary);
+}
+
+.submitButton {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+
+/* Responsive Styles */
+@media (max-width: 1199px) {
+  .contentWrapper {
+    margin-top: var(--spacing-xl);
+  }
+}
+
+@media (max-width: 991px) {
+  .profileCard {
+    max-width: 500px;
+  }
+}
+
+@media (max-width: 767px) {
+  .contentWrapper {
+    margin-top: var(--spacing-lg);
+    padding: 0 var(--spacing-sm);
+  }
+
+  .profileCard {
+    padding: var(--spacing-md);
+  }
+
+  .headerTitle {
+    font-size: var(--font-size-lg);
+  }
+
+  .dialogContent {
+    min-width: 250px;
+  }
+}
+
+@media (max-width: 575px) {
+  .contentWrapper {
+    margin-top: var(--spacing-md);
+    padding: 0 var(--spacing-xs);
+  }
+
+  .profileCard {
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius-sm);
+  }
+
+  .tableLabel {
+    width: 35%;
+    font-size: var(--font-size-sm);
+  }
+
+  .tableValue {
+    font-size: var(--font-size-sm);
+  }
+
+  .dialogContent {
+    min-width: 200px;
+  }
+}

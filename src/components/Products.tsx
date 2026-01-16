@@ -11,6 +11,7 @@ import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import Navbar from "./ui/Navbar";
+import styles from "./Products.module.css";
 
 interface Product {
   id: number;
@@ -43,7 +44,7 @@ export default function Products() {
       axios
         .get("https://dummyjson.com/products", {
           params: {
-            skip: 5,
+            // skip: 5,
             limit: 8,
           },
         })
@@ -66,9 +67,9 @@ export default function Products() {
 
   if (loading) {
     return (
-      <div>
+      <div className={styles.productsContainer}>
         <Navbar />
-        <Box sx={{ display: "flex", justifyContent: "center", mt: 10 }}>
+        <Box className={styles.loadingContainer}>
           <CircularProgress />
         </Box>
       </div>
@@ -76,19 +77,19 @@ export default function Products() {
   }
 
   return (
-    <div>
+    <div className={styles.productsContainer}>
       <Navbar />
-      <TableContainer component={Paper}>
-        <Table aria-label="products table">
-          <TableHead>
+      <TableContainer component={Paper} className={styles.tableContainer}>
+        <Table aria-label="products table" className={styles.table}>
+          <TableHead className={styles.tableHead}>
             <TableRow>
-              <TableCell>Image</TableCell>
-              <TableCell>Product Name</TableCell>
-              <TableCell align="right">Brand</TableCell>
-              <TableCell align="right">Category</TableCell>
-              <TableCell align="right">Price</TableCell>
-              <TableCell align="right">Stock</TableCell>
-              <TableCell align="right">Rating</TableCell>
+              <TableCell className={styles.tableHeadCell}>Image</TableCell>
+              <TableCell className={styles.tableHeadCell}>Product Name</TableCell>
+              <TableCell align="right" className={styles.tableHeadCell}>Brand</TableCell>
+              <TableCell align="right" className={styles.tableHeadCell}>Category</TableCell>
+              <TableCell align="right" className={styles.tableHeadCell}>Price</TableCell>
+              <TableCell align="right" className={styles.tableHeadCell}>Stock</TableCell>
+              <TableCell align="right" className={styles.tableHeadCell}>Rating</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -97,28 +98,23 @@ export default function Products() {
                 key={product.id}
                 hover
                 onClick={() => navigate(`/view-product?id=${product.id}`)}
-                sx={{ cursor: "pointer" }}
+                className={styles.tableRow}
               >
                 <TableCell>
                   <img
                     src={product.thumbnail}
                     alt={product.title}
-                    style={{
-                      width: 50,
-                      height: 50,
-                      objectFit: "cover",
-                      borderRadius: 4,
-                    }}
+                    className={styles.productThumbnail}
                   />
                 </TableCell>
-                <TableCell component="th" scope="row">
+                <TableCell component="th" scope="row" className={styles.productTitle}>
                   {product.title}
                 </TableCell>
-                <TableCell align="right">{product.brand}</TableCell>
-                <TableCell align="right">{product.category}</TableCell>
-                <TableCell align="right">${product.price}</TableCell>
-                <TableCell align="right">{product.stock}</TableCell>
-                <TableCell align="right">{product.rating}</TableCell>
+                <TableCell align="right" className={styles.productBrand}>{product.brand}</TableCell>
+                <TableCell align="right" className={styles.productCategory}>{product.category}</TableCell>
+                <TableCell align="right" className={styles.productPrice}>${product.price}</TableCell>
+                <TableCell align="right" className={styles.productStock}>{product.stock}</TableCell>
+                <TableCell align="right" className={styles.productRating}>{product.rating}</TableCell>
               </TableRow>
             ))}
           </TableBody>
