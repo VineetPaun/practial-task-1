@@ -1,72 +1,212 @@
 .appContainer {
   min-height: 100vh;
   background-color: var(--color-background);
+  display: flex;
+  flex-direction: column;
 }
 
-.contentWrapper {
-  margin-top: var(--spacing-xl);
+/* Hero Section */
+.heroSection {
+  background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%);
+  padding: 80px 0;
   text-align: center;
-  padding: 0 var(--spacing-md);
 }
 
-.welcomeTitle {
-  font-size: var(--font-size-xxxl);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-text-primary);
+.heroContent {
+  color: #ffffff;
 }
 
-.loginPrompt {
-  font-size: var(--font-size-xl);
-  color: var(--color-text-secondary);
+.heroTitle {
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #ffffff;
+}
+
+.heroSubtitle {
+  font-weight: 400;
+  margin-bottom: 32px;
+  opacity: 0.9;
+  color: #ffffff;
+}
+
+.heroButtons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.heroButton {
+  background-color: #ffffff !important;
+  color: #1976d2 !important;
+  font-weight: 600 !important;
+  padding: 14px 36px !important;
+  border-radius: 30px !important;
+  text-transform: none !important;
+  font-size: 1rem !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2) !important;
+  transition: all 0.3s ease !important;
+}
+
+.heroButton:hover {
+  background-color: #f0f0f0 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25) !important;
+}
+
+.heroButtonOutlined {
+  border: 2px solid #ffffff !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  padding: 12px 34px !important;
+  border-radius: 30px !important;
+  text-transform: none !important;
+  font-size: 1rem !important;
+  background-color: transparent !important;
+  transition: all 0.3s ease !important;
+}
+
+.heroButtonOutlined:hover {
+  background-color: #ffffff !important;
+  color: #1976d2 !important;
+  transform: translateY(-2px);
+}
+
+/* Features Section */
+.featuresSection {
+  padding: 64px 0;
+  flex-grow: 1;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 48px;
+  color: #212121;
+}
+
+.featuresGrid {
+  margin-top: 24px;
+}
+
+.featureCard {
+  height: 100%;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 12px;
+}
+
+.featureCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.featureCardContent {
+  padding: 32px 24px;
+}
+
+.featureIcon {
+  margin-bottom: 16px;
+}
+
+.featureTitle {
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #212121;
+}
+
+.featureDescription {
+  color: #757575;
+  line-height: 1.6;
+}
+
+/* Footer */
+.footer {
+  background-color: #212121;
+  padding: 24px;
+  text-align: center;
+  margin-top: auto;
+}
+
+.footerText {
+  color: #ffffff;
+  opacity: 0.8;
 }
 
 /* Responsive Styles */
 @media (max-width: 1199px) {
-  .contentWrapper {
-    margin-top: var(--spacing-lg);
+  .heroSection {
+    padding: 60px 0;
   }
 
-  .welcomeTitle {
-    font-size: var(--font-size-xxl);
+  .heroTitle {
+    font-size: 2.5rem;
   }
 }
 
 @media (max-width: 991px) {
-  .welcomeTitle {
-    font-size: var(--font-size-xl);
+  .heroSection {
+    padding: 48px 0;
   }
 
-  .loginPrompt {
-    font-size: var(--font-size-lg);
+  .heroTitle {
+    font-size: 2rem;
+  }
+
+  .featuresSection {
+    padding: 48px 16px;
+  }
+
+  .sectionTitle {
+    font-size: 1.5rem;
+    margin-bottom: 32px;
   }
 }
 
 @media (max-width: 767px) {
-  .contentWrapper {
-    margin-top: var(--spacing-md);
-    padding: 0 var(--spacing-sm);
+  .heroSection {
+    padding: 40px 16px;
   }
 
-  .welcomeTitle {
-    font-size: var(--font-size-lg);
+  .heroTitle {
+    font-size: 1.75rem;
   }
 
-  .loginPrompt {
-    font-size: var(--font-size-md);
+  .heroSubtitle {
+    font-size: 1rem;
+  }
+
+  .heroButtons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .heroButton,
+  .heroButtonOutlined {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .featuresSection {
+    padding: 32px 16px;
   }
 }
 
 @media (max-width: 575px) {
-  .contentWrapper {
-    margin-top: var(--spacing-sm);
-    padding: 0 var(--spacing-xs);
+  .heroSection {
+    padding: 32px 12px;
   }
 
-  .welcomeTitle {
-    font-size: var(--font-size-md);
+  .heroTitle {
+    font-size: 1.5rem;
   }
 
-  .loginPrompt {
-    font-size: var(--font-size-sm);
+  .heroSubtitle {
+    font-size: 0.875rem;
+    margin-bottom: 24px;
+  }
+
+  .featureCardContent {
+    padding: 24px 16px;
   }
 }
